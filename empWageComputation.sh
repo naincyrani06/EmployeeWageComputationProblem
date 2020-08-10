@@ -34,6 +34,7 @@ do
        dailyEmpWage["Day"$totalWorkingDays]=$((empWagepErHour*empHr))
 
         totalEmpHour=$((totalEmpHour+empHr))
+	 totalEmpWage=$((totalEmpHour*empWagePerHour))
 done
 
 for i in "${!dailyEmpWage[@]}"
@@ -41,5 +42,5 @@ do
         echo "$i:${dailyEmpWage[$i]}"
 done
 echo "Total Working Hours of Employee in a Month is: "$totalEmpHour
-
+echo "Total Wage of Employee in a month is: "$totalEmpWage
 

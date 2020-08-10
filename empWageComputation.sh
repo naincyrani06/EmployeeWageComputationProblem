@@ -7,30 +7,39 @@ noOfWorkingDays=20
 maximumWorkingHours=100
 totalEmpHour=0
 totalWorkingDays=0
-
 declare -A dailyEmpWage
+function getEmployeeHours()
+{
+        empCheck=$1
+       case $empCheck in
+                $isPartTime)
+                      empHr=4
+                ;;
+                $isFullTime)
+                        empHr=8
+                ;;
+                *)
+                        empHr=0
+                ;;
+        esac
+
+        echo $empHr
+}
 while [[ $totalEmpHour -le $maximumWorkingHours && $totalWorkingDays -le $noOfWorkingDays ]]
 do
-       ((totalWorkingDays++))
-       empCheck=$((RANDOM%3))
-	case $empCheck in
-               $isPartTime)
-                       empHr=4
-               ;;
-               $isFulltime)
-                       empHr=8
-               ;;
-               *)
-                       empHr=0
-               ;;
-       esac
+        ((totalWorkingDays++))
+        empCheck=$((RANDOM%3))
+        empHr=$( getEmployeeHours $empCheck )
 
-       dailyEmpWage["Day"$totalWorkingDays]=$((empWagePerHour*empHr))
-	totalEmpHour=$((totalEmpHour+empHr))
+       dailyEmpWage["Day"$totalWorkingDays]=$((empWagepErHour*empHr))
+
+        totalEmpHour=$((totalEmpHour+empHr))
 done
+
 for i in "${!dailyEmpWage[@]}"
 do
-       echo "$i:${dailyEmpWage[$i]}"
+        echo "$i:${dailyEmpWage[$i]}"
 done
-echo "Total Employee Hours of Employee in a month: "$totalEmpHour
+echo "Total Working Hours of Employee in a Month is: "$totalEmpHour
+
 
